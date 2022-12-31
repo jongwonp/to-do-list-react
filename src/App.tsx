@@ -1,4 +1,4 @@
-import ToDoList from './toDoList';
+import ToDoList from './components/toDoList';
 
 function App() {
   return (
