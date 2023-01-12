@@ -8,17 +8,20 @@ function ToDo({ text, category, id }: IToDo) {
     const {
       currentTarget: { name }, // 클릭한 button의 name
     } = event;
-
     // setToDos(=useSetRecoilState)로 atom에 저장된 state 를 변경
     setToDos((oldToDos) => {
       const targetIndex = oldToDos.findIndex((toDo) => toDo.id === id); // state(배열)가 가진 요소들중 id가 현재 Todo의 id와 같은 요소의 index
-      const oldToDo = oldToDos[targetIndex]; // 현재 state(배열)에서 index가 targetIndex인 요소
       const newToDo = { text, id, category: name as any }; // 현재 입력한 Todo
       return [
         ...oldToDos.slice(0, targetIndex),
         newToDo,
         ...oldToDos.slice(targetIndex + 1),
       ];
+    });
+  };
+  const deleteTodo = () => {
+    setToDos((oldToDos) => {
+      return oldToDos.filter((toDo) => toDo.id !== id);
     });
   };
   return (
@@ -39,6 +42,7 @@ function ToDo({ text, category, id }: IToDo) {
           Done
         </button>
       )}
+      <button onClick={deleteTodo}>❌</button>
     </li>
   );
 }
