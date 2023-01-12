@@ -1,8 +1,11 @@
 import React from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import styled from 'styled-components';
 import { Categories, categoryState, toDoSelector } from '../atom';
 import CreateToDo from './CreateToDo';
 import ToDo from './ToDo';
+
+const Container = styled.div``;
 
 function ToDoList() {
   const toDos = useRecoilValue(toDoSelector); // selector에서 state를 받아옴
@@ -12,7 +15,7 @@ function ToDoList() {
   };
 
   return (
-    <div>
+    <Container>
       <h1>To Dos</h1>
       <hr />
       <select onInput={onInput}>
@@ -24,7 +27,7 @@ function ToDoList() {
       {toDos?.map((toDo) => (
         <ToDo key={toDo.id} {...toDo} />
       ))}
-    </div>
+    </Container>
   );
 }
 
